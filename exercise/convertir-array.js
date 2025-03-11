@@ -1,3 +1,6 @@
+// Modifico el array para obtener la propiedad nombre del objeto
+// Se formatea
+// Se añade manejo de errores
 function convertirArray(personas){
 
     // Controlo que sea un arreglo
@@ -6,12 +9,25 @@ function convertirArray(personas){
     }
 
     if (personas.length === 0){
-        return "El objeto está vacío"
+        return "El array está vacío"
     }
     
-    const personasNombre = personas.map(element => element.nombre);
-    
-    return personasNombre.map(element => element[0].toUpperCase() + element.substring(1).toLowerCase());
+    return personas
+        .map(element => {
+            // Verificamos que contenga la propiedad nombre
+            if (!element.nombre){
+                return "No existe la propiedad nombre"
+            }
+
+            // Verificamos que sea un string
+            if (typeof element.nombre !== "string" || element.nombre.trim() === "") {
+                return "La palabra no es texto"
+            }
+
+            // Formateamos el texto (Primer letra en mayúscula, resto en minúscula)
+            return element.nombre[0].toUpperCase() + element.nombre.substring(1).toLowerCase();
+        }
+    )
     
 }
 
